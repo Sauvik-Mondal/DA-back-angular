@@ -42,7 +42,7 @@ if(!config.get('jwtPrivateKey')){
     process.exit(1);
 }
 //connect to db
-mongoose.connect('mongodb://localhost/DA')
+mongoose.connect('mongodb://localhost/DA',{ useUnifiedTopology: true })
 .then(() => console.log('connected'))
 .catch(() => console.log('error in connection'));
 

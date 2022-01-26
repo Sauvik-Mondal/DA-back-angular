@@ -42,7 +42,7 @@ const ConectionSchema = new mongoose.Schema({
     },
     feedbackType: {
         type: String,
-        enum : ['query','praise','suggession'],
+        enum : ['query','praise','suggession','Query','Praise','Suggession'],
         required: true,
     },
     feedback: {

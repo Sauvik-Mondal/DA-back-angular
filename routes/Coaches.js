@@ -6,7 +6,7 @@ const isRestricted = require('../middleware/auth');
 const router = Express.Router();
 
 router.get('/', (req, res) => {
-    throw new Error('dsvs');
+    // throw new Error('dsvs');
     Coach
         .find()
         .sort({ rating: -1 })
@@ -15,10 +15,10 @@ router.get('/', (req, res) => {
             console.log('Success');
             res.send(data);
         })
-        // .catch((err) => {
-        //     console.log('err in saving' + err.message);
-        //     res.status(500).send({'message':'error in fetching data' + err.message});
-        // });
+        .catch((err) => {
+            console.log('err in saving' + err.message);
+            res.status(500).send({'message':'error in fetching data' + err.message});
+        });
 })
 
 router.post('/', isRestricted, async (req, res) => {
@@ -100,4 +100,21 @@ router.delete('/:userId', (req, res) => {
         // });
 })
 
+router.get('/:id', (req, res) => {
+    Coach
+        .findById(req.params.id)
+        .then((data) => {
+            console.log('Success');
+            res.send(data);
+        })
+})
+
+router.get('/user/:userId', (req, res) => {
+    Coach
+        .findOne({ 'userId': req.params.userId })
+        .then((data) => {
+            console.log('Success');
+            res.send(data);
+        })
+})
 module.exports = router;
